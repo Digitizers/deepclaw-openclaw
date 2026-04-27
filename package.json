@@ -68,6 +68,13 @@
   "openclaw": {
     "type": "plugin",
     "category": "observability",
+    "compat": {
+      "pluginApi": ">=2026.3.2",
+      "minGatewayVersion": "2026.3.2"
+    },
+    "build": {
+      "openclawVersion": "2026.4.24"
+    },
     "tags": [
       "deepclaw",
       "cost-tracking",
