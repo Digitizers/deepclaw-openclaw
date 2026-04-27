@@ -5,7 +5,7 @@
   "description": "DeepClaw observability plugin for OpenClaw — real-time LLM usage, token, cache, reasoning, and cost telemetry.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Digitizers/deepclaw-openclaw.git"
+    "url": "git+https://github.com/Digitizers/deepclaw-openclaw.git"
   },
   "homepage": "https://github.com/Digitizers/deepclaw-openclaw#readme",
   "bugs": {
