@@ -120,6 +120,7 @@ The package is intentionally narrow:
 - `LICENSE`
 - `SECURITY.md`
 - `CHANGELOG.md`
+- `SKILL.md`
 
 ## Security
 

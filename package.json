@@ -62,7 +62,8 @@
     "README.md",
     "LICENSE",
     "CHANGELOG.md",
-    "SECURITY.md"
+    "SECURITY.md",
+    "SKILL.md"
   ],
   "openclaw": {
     "type": "plugin",
