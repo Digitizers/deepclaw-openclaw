@@ -1,6 +1,6 @@
 {
   "name": "deepclaw-openclaw",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "description": "DeepClaw observability plugin for OpenClaw — real-time LLM usage, token, cache, reasoning, and cost telemetry.",
   "repository": {

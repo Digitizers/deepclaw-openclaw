@@ -128,8 +128,8 @@ Do not commit sync tokens or OpenClaw runtime state. See [SECURITY.md](SECURITY.
 
 ## Status
 
-`0.1.0` is an initial public release candidate. APIs may still evolve with OpenClaw plugin hook changes.
+`0.1.1` is an initial public release candidate. APIs may still evolve with OpenClaw plugin hook changes.
 
 ## License
 
-MIT © Ben Kalsky / Digitizers.
+MIT © Ben Kalsky / [Digitizer](https://digitizer.co.il).
