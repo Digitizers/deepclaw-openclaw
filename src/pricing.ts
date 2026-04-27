@@ -127,16 +127,14 @@ export function calculateCost(opts: {
 }): CostBreakdown {
   const key = normalizeModel(opts.model);
 
-  // Try exact match, then prefix match
-  let pricing: ModelPricing | undefined = PRICING[key];
+  // Try exact match, then longest prefix match for dated/preview provider aliases.
+  let modelKey: string | null = PRICING[key] ? key : null;
+  let pricing: ModelPricing | undefined = modelKey ? PRICING[modelKey] : undefined;
   if (!pricing) {
-    // Find longest prefix match
-    for (const k of Object.keys(PRICING)) {
-      if (key.startsWith(k) || k.startsWith(key)) {
-        pricing = PRICING[k];
-        break;
-      }
-    }
+    modelKey = Object.keys(PRICING)
+      .filter((k) => key.startsWith(k) || k.startsWith(key))
+      .sort((a, b) => b.length - a.length)[0] ?? null;
+    pricing = modelKey ? PRICING[modelKey] : undefined;
   }
 
   if (!pricing) {
@@ -156,7 +154,7 @@ export function calculateCost(opts: {
   // Gemini step-function tier: if total prompt > threshold, ALL tokens at higher rate
   const aboveTier = pricing.tierThreshold && totalInput > pricing.tierThreshold;
   const inputRate = aboveTier ? (pricing.inputPerMAboveTier ?? pricing.inputPerM) : pricing.inputPerM;
-  const outputRate = pricing.outputPerM;
+  const outputRate = aboveTier ? (pricing.outputPerMAboveTier ?? pricing.outputPerM) : pricing.outputPerM;
   const cacheReadRate = aboveTier
     ? (pricing.cacheReadPerMAboveTier ?? pricing.cacheReadPerM ?? 0)
     : (pricing.cacheReadPerM ?? 0);
@@ -187,6 +185,6 @@ export function calculateCost(opts: {
     cacheWriteCost,
     totalCost,
     priceSource: "table",
-    modelKey: key,
+    modelKey,
   };
 }
