@@ -1,0 +1,72 @@
+{
+  "name": "deepclaw-openclaw",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "OpenClaw plugin \u2014 sends real-time LLM cost & usage data to DeepClaw",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Digitizers/deepclaw-openclaw.git"
+  },
+  "homepage": "https://github.com/Digitizers/deepclaw-openclaw#readme",
+  "bugs": {
+    "url": "https://github.com/Digitizers/deepclaw-openclaw/issues"
+  },
+  "author": "Ben Kalsky <ben@digitizer.co.il> (https://digitizer.co.il)",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "smoke": "vitest run src/**/*.test.ts"
+  },
+  "keywords": [
+    "openclaw",
+    "openclaw-plugin",
+    "deepclaw",
+    "llm-observability",
+    "llm-costs",
+    "cost-tracking",
+    "token-usage",
+    "ai-gateway",
+    "monitoring",
+    "analytics"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "openclaw": ">=2026.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.4.0",
+    "vitest": "^4.1.5",
+    "openclaw": "^2026.4.24"
+  },
+  "files": [
+    "index.ts",
+    "src/config.ts",
+    "src/pricing.ts",
+    "src/service.ts",
+    "openclaw.plugin.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "openclaw": {
+    "type": "plugin",
+    "category": "observability",
+    "tags": [
+      "deepclaw",
+      "cost-tracking",
+      "tokens",
+      "llm-observability",
+      "monitoring"
+    ],
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

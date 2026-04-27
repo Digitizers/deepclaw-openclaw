@@ -1,0 +1,47 @@
+{
+  "id": "deepclaw-openclaw",
+  "name": "DeepClaw",
+  "description": "Export real-time LLM cost & usage data to DeepClaw analytics",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": { "type": "boolean" },
+      "apiUrl": { "type": "string" },
+      "syncToken": { "type": "string" },
+      "instanceId": { "type": "string" },
+      "flushIntervalMs": { "type": "number" },
+      "debug": { "type": "boolean" }
+    }
+  },
+  "uiHints": {
+    "enabled": {
+      "label": "Enabled",
+      "help": "Enable DeepClaw cost tracking."
+    },
+    "apiUrl": {
+      "label": "DeepClaw API URL",
+      "placeholder": "https://deepclaw.app",
+      "help": "Base URL of your DeepClaw instance."
+    },
+    "syncToken": {
+      "label": "Sync Token",
+      "sensitive": true,
+      "help": "Token from DeepClaw → Settings → API."
+    },
+    "instanceId": {
+      "label": "Instance ID",
+      "placeholder": "srv1421692",
+      "help": "Identifies this OpenClaw instance in DeepClaw."
+    },
+    "flushIntervalMs": {
+      "label": "Flush Interval (ms)",
+      "placeholder": "5000",
+      "help": "How often to batch-send accumulated usage. Default: 5000."
+    },
+    "debug": {
+      "label": "Debug Logging",
+      "help": "Log each LLM event to console."
+    }
+  }
+}
