@@ -1,0 +1,92 @@
+name: Publish packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Registry target
+        required: true
+        default: both
+        type: choice
+        options:
+          - npmjs
+          - github-packages
+          - both
+      dry_run:
+        description: Run publish commands with --dry-run where supported
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    name: Publish OpenClaw plugin package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify package before publishing
+        run: npm run ci
+
+      - name: Publish to npmjs
+        if: ${{ inputs.target == 'npmjs' || inputs.target == 'both' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            npm publish --access public --dry-run
+          else
+            npm publish --access public
+          fi
+
+      - name: Build scoped GitHub Packages tarball directory
+        if: ${{ inputs.target == 'github-packages' || inputs.target == 'both' }}
+        run: |
+          set -euo pipefail
+          PACK_JSON=$(npm pack --json --ignore-scripts)
+          PACK_FILE=$(printf '%s' "$PACK_JSON" | node -e "let s=''; process.stdin.on('data', d => s += d); process.stdin.on('end', () => { const start = s.indexOf('['); const p = JSON.parse(s.slice(start)); console.log(p[0].filename); });")
+          rm -rf .publish-ghpkg
+          mkdir .publish-ghpkg
+          tar -xzf "$PACK_FILE" -C .publish-ghpkg --strip-components=1
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const path = '.publish-ghpkg/package.json';
+          const pkg = JSON.parse(fs.readFileSync(path, 'utf8'));
+          pkg.name = '@digitizers/deepclaw-openclaw';
+          pkg.publishConfig = {
+            registry: 'https://npm.pkg.github.com',
+            access: 'public'
+          };
+          fs.writeFileSync(path, `${JSON.stringify(pkg, null, 2)}\n`);
+          NODE
+
+      - name: Publish scoped package to GitHub Packages
+        if: ${{ inputs.target == 'github-packages' || inputs.target == 'both' }}
+        working-directory: .publish-ghpkg
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          npm config set @digitizers:registry https://npm.pkg.github.com
+          printf "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}\n" >> ~/.npmrc
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            npm publish --registry=https://npm.pkg.github.com --access public --ignore-scripts --dry-run
+          else
+            npm publish --registry=https://npm.pkg.github.com --access public --ignore-scripts
+          fi

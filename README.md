@@ -27,9 +27,23 @@ This plugin captures the raw usage shape exposed by OpenClaw, normalizes the imp
 
 ## Installation
 
+From the public npm registry:
+
 ```bash
 npm install deepclaw-openclaw
 ```
+
+From GitHub Packages, once the scoped mirror package has been published:
+
+```bash
+# .npmrc
+@digitizers:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+
+npm install @digitizers/deepclaw-openclaw
+```
+
+The GitHub Packages build is published as the scoped alias `@digitizers/deepclaw-openclaw`; the canonical npmjs package remains `deepclaw-openclaw` for easier public installation.
 
 For local development or manual installation:
 
@@ -128,7 +142,7 @@ Do not commit sync tokens or OpenClaw runtime state. See [SECURITY.md](SECURITY.
 
 ## Status
 
-`0.1.1` is an initial public release candidate. APIs may still evolve with OpenClaw plugin hook changes.
+`0.1.2` is an initial public release candidate. APIs may still evolve with OpenClaw plugin hook changes.
 
 ## License
 

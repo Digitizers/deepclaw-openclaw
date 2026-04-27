@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented here.
 
+## 0.1.2 - GitHub Packages publishing prep
+
+- Add GitHub Actions workflow support for publishing to npmjs and GitHub Packages.
+- Document the scoped GitHub Packages install path as `@digitizers/deepclaw-openclaw`.
+
 ## 0.1.1 - Metadata cleanup
 
 - Mark `syncToken` as required in the OpenClaw plugin config schema for clearer marketplace/security metadata.
