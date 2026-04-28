@@ -84,7 +84,7 @@ jobs:
         run: |
           set -euo pipefail
           npm config set @digitizers:registry https://npm.pkg.github.com
-          printf "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}\n" >> ~/.npmrc
+          npm config set //npm.pkg.github.com/:_authToken "${NODE_AUTH_TOKEN}"
           if [ "${{ inputs.dry_run }}" = "true" ]; then
             npm publish --registry=https://npm.pkg.github.com --access public --ignore-scripts --dry-run
           else
