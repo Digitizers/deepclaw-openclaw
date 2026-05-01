@@ -22,6 +22,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "smoke": "vitest run src/**/*.test.ts",
+    "check:clawhub": "node scripts/check-clawhub-version.mjs",
     "ci": "npm run typecheck && npm test && npm pack --dry-run",
     "prepack": "npm run typecheck && npm test"
   },

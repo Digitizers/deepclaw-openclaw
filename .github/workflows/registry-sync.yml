@@ -1,0 +1,35 @@
+name: Registry sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 8 * * *'
+  push:
+    branches: [main]
+    paths:
+      - package.json
+      - scripts/check-clawhub-version.mjs
+      - .github/workflows/registry-sync.yml
+
+permissions:
+  contents: read
+
+jobs:
+  clawhub-version:
+    name: ClawHub latest matches package.json
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check ClawHub published version
+        run: npm run check:clawhub
