@@ -2,10 +2,12 @@
   "id": "deepclaw-openclaw",
   "name": "DeepClaw",
   "description": "Export real-time LLM cost & usage data to DeepClaw analytics",
+  "activation": {
+    "onStartup": true
+  },
   "configSchema": {
     "type": "object",
     "additionalProperties": false,
-    "required": ["syncToken"],
     "properties": {
       "enabled": { "type": "boolean" },
       "apiUrl": { "type": "string" },
