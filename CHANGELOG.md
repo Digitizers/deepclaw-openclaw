@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented here.
 
+## 0.1.5 - Plugin API range correction
+
+- Use the single-comparator plugin API range accepted by OpenClaw 2026.9 while retaining the npm peer range needed by the deployed prerelease-tagged host.
+
 ## 0.1.4 - OpenClaw 2026.9 compatibility
 
 - Import plugin APIs from the supported `openclaw/plugin-sdk/core` entrypoint.
