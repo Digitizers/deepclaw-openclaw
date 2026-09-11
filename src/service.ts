@@ -1,4 +1,4 @@
-import type { OpenClawPluginApi } from "openclaw/plugin-sdk";
+import type { OpenClawPluginApi } from "openclaw/plugin-sdk/core";
 import type { DeepClawConfig } from "./config.js";
 import { calculateCost } from "./pricing.js";
 

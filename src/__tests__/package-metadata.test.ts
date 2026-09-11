@@ -11,9 +11,16 @@ const manifest = JSON.parse(
 );
 
 describe("OpenClaw package metadata", () => {
-  it("ships compiled runtime output for OpenClaw 2026.5.6 plugin discovery", () => {
+  it("ships compiled runtime output for OpenClaw plugin discovery", () => {
     expect(packageJson.files).toContain("dist/**");
     expect(packageJson.openclaw.runtimeExtensions).toEqual(["./dist/index.js"]);
+  });
+
+  it("targets the split plugin SDK used by OpenClaw 2026.9.4", () => {
+    expect(packageJson.devDependencies.openclaw).toBe("2026.9.4");
+    expect(packageJson.peerDependencies.openclaw).toBe("2026.7.1-2 || >=2026.5.6");
+    expect(packageJson.openclaw.build.openclawVersion).toBe("2026.9.4");
+    expect(packageJson.openclaw.compat.minGatewayVersion).toBe("2026.5.6");
   });
 
   it("keeps TypeScript source extensions for marketplace metadata", () => {
