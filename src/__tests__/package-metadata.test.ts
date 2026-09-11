@@ -20,6 +20,7 @@ describe("OpenClaw package metadata", () => {
     expect(packageJson.devDependencies.openclaw).toBe("2026.9.4");
     expect(packageJson.peerDependencies.openclaw).toBe("2026.7.1-2 || >=2026.5.6");
     expect(packageJson.openclaw.build.openclawVersion).toBe("2026.9.4");
+    expect(packageJson.openclaw.compat.minGatewayVersion).toBe("2026.5.6");
   });
 
   it("keeps TypeScript source extensions for marketplace metadata", () => {
