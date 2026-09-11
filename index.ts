@@ -1,6 +1,6 @@
 // DeepClaw OpenClaw Plugin — real-time LLM cost & usage tracking
-import type { OpenClawPluginApi } from "openclaw/plugin-sdk";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk";
+import type { OpenClawPluginApi } from "openclaw/plugin-sdk/core";
+import { emptyPluginConfigSchema } from "openclaw/plugin-sdk/core";
 import { createDeepClawService } from "./src/service.js";
 import { parseDeepClawConfig } from "./src/config.js";
 
