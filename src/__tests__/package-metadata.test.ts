@@ -16,12 +16,12 @@ describe("OpenClaw package metadata", () => {
     expect(packageJson.openclaw.runtimeExtensions).toEqual(["./dist/index.js"]);
   });
 
-  it("targets the split plugin SDK used by OpenClaw 2026.9.4", () => {
-    expect(packageJson.devDependencies.openclaw).toBe("2026.9.4");
+  it("targets the split plugin SDK used by OpenClaw 2026.9.9", () => {
+    expect(packageJson.devDependencies.openclaw).toBe("2026.9.9");
     expect(packageJson.peerDependencies.openclaw).toBe("2026.7.1-2 || >=2026.5.6");
     expect(packageJson.openclaw.compat.pluginApi).toBe(">=2026.5.6");
     expect(packageJson.openclaw.compat.pluginApi).not.toContain("||");
-    expect(packageJson.openclaw.build.openclawVersion).toBe("2026.9.4");
+    expect(packageJson.openclaw.build.openclawVersion).toBe("2026.9.9");
     expect(packageJson.openclaw.compat.minGatewayVersion).toBe("2026.5.6");
   });
 
